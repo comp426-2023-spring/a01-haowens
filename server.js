@@ -51,7 +51,8 @@ fs.readFile('./public/index.html', 'utf8', (err, data) => {
 
 const server = http.createServer(requestListener);
 server.listen(port, host, () => {
-    console.log(`Server is running on http://${host}:${port}`);
+    header("Content-Type: text/html");
+    console.log(fs.readFile());
 });
 
 // Start the `server` const listening on the port defined by argument in your `port` const.
