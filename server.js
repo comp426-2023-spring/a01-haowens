@@ -17,7 +17,11 @@ fs.readFile('./public/index.html', 'utf8', (err, data) => {
     console.error(err);
     return;
   }
-  console.log(data);
+  http.createServer(function (req, res)  {
+    res.writeHead(200, {'Content-Type': 'text/html'}
+    res.end(data);
+    console.log("Server listening on port ${port}");
+  }).listen(port);
 });
 
 // Define a const `server` as an arrow function using http.createServer.
@@ -26,14 +30,6 @@ fs.readFile('./public/index.html', 'utf8', (err, data) => {
 // 1. status code 200,
 // 2. set a header with content type `text/html`, and
 // 3. end with the data that you are reading in from ./public/index.html.
-
-
-http.createServer(function (req, res) {
-  res.writeHead(200, {'Content-Type': 'text/html'});
-  fs.readFile();
-  res.end();
-  console.log("Server listening on port ${port}");
-}).listen(port);
 
  
 // Start the `server` const listening on the port defined by argument in your `port` const.
