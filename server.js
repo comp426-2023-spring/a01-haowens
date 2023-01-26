@@ -1,12 +1,12 @@
 const http = require("http"); 
 const fs = require("fs");
 var minimist = require('minimist')(process.argv.slice(2));
+const port = minimist.port || 3000;
 
 // Use minimist to process one argument `--port=` on the command line after `node server.js`.
 // Define a const `port` using the argument from the command line.
 
 const host = 'localhost';
-const port = minimist.port || 3000;
 
 fs.readFile('./public/index.html', 'utf8', (err, data) => {
   if (err) {
@@ -14,9 +14,11 @@ fs.readFile('./public/index.html', 'utf8', (err, data) => {
     return;
   }
   http.createServer(function (req, res)  {
-    res.writeHead(200, {'Content-Type': 'text/html'});
+    res.statusCode = 200;    
+    res.setHeader({'Content-Type': 'text/html'});
     res.end(data);
-  });
+    console.log(`Server listening on port ${port}`);
+  }).listen(port);
 });
 
 // Define a const `server` as an arrow function using http.createServer.
@@ -30,6 +32,3 @@ fs.readFile('./public/index.html', 'utf8', (err, data) => {
 // Start the `server` const listening on the port defined by argument in your `port` const.
 // Put the exact message `Server listening on port ${port}` on the console log.
 
-server.listen(port,() => {
-    console.log(`Server listening on port ${port}`)})
-});
