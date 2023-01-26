@@ -1,8 +1,9 @@
 const http = require("http"); 
 const fs = require("fs");
-var minimist = require('minimist')(process.argv.slice(2));
-const port = minimist.port || 3000;
+//var minimist = require('minimist')(process.argv.slice(2));
+//const port = minimist.port || 3000;
 
+const minimist = require('minimist');
 const args = minimist(process.argv.slice()); 
 const port = args["port"] || 3000;
 
