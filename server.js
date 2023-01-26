@@ -3,6 +3,10 @@ const fs = require("fs");
 var minimist = require('minimist')(process.argv.slice(2));
 const port = minimist.port || 3000;
 
+const args = minimist(process.argv.slice()); 
+const port = args["port"] || 3000;
+
+
 // Use minimist to process one argument `--port=` on the command line after `node server.js`.
 // Define a const `port` using the argument from the command line.
 
@@ -14,8 +18,7 @@ fs.readFile('./public/index.html', 'utf8', (err, data) => {
     return;
   }
   http.createServer(function (req, res)  {
-    res.statusCode = 200;    
-    res.setHeader({'Content-Type': 'text/html'});
+    res.writeHead(200, {'Content-Type': 'text/html'});
     res.end(data);
     console.log(`Server listening on port ${port}`);
   }).listen(port);
