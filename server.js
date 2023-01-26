@@ -1,16 +1,12 @@
 const http = require("http"); 
 const fs = require("fs");
-const minimist = require("minimist");
+var minimist = require('minimist')(process.argv.slice(2));
 
 // Use minimist to process one argument `--port=` on the command line after `node server.js`.
 // Define a const `port` using the argument from the command line.
 
 const host = 'localhost';
-let port = minimist(process.argv.slice(2), {
-    default: {
-        port: 3000
-    },
-});
+var port = minimist.port || 3000;
 
 fs.readFile('./public/index.html', 'utf8', (err, data) => {
   if (err) {
